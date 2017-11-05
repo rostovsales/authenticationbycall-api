@@ -11,7 +11,6 @@ class abc
 // Creating new authentication
     public function authpost($api_token, $form_token, $telephone)
     {
-        $url = 'https://authenticationbycall.com/api/';
         $params = array(
             'method' => 'authpost',
             'api_token' => $api_token,
@@ -19,7 +18,7 @@ class abc
             'telephone' => $telephone,
         );
 
-        $response = $this->api_curl($url, $params);
+        $response = $this->api_curl($params);
         $response = json_decode($response, true);
 //        print_r($response);
         return $response;
@@ -28,14 +27,13 @@ class abc
 // check status of authentication
     public function authget($api_token, $form_token, $uniq_id)
     {
-        $url = 'https://authenticationbycall.com/api/';
         $params = array(
             'method' => 'authget',
             'api_token' => $api_token,
             'form_token' => $form_token,
             'uniq_id' => $uniq_id,
         );
-        $response = $this->api_curl($url, $params);
+        $response = $this->api_curl($params);
         $response = json_decode($response, true);
 //        print_r($response);
         return $response;
@@ -44,21 +42,22 @@ class abc
 //  geting list of phonenumbers that waiting calls
     public function phonenumbersget($api_token, $form_token)
     {
-        $url = 'https://authenticationbycall.com/api/';
         $params = array(
             'method' => 'phonenumbersget',
             'api_token' => $api_token,
             'form_token' => $form_token
         );
-        $response = $this->api_curl($url, $params);
+        $response = $this->api_curl($params);
         $response = json_decode($response, true);
 //        print_r($response);
         return $response;
     }
 
 //  method for send curl
-    public function api_curl($url, $params)
+    private function api_curl($params)
     {
+        $url = 'https://authenticationbycall.com/api/';
+
         $myCurl = curl_init();
         curl_setopt_array($myCurl, array(
             CURLOPT_URL => $url,
