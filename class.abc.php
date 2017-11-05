@@ -1,7 +1,7 @@
 <?php
 
 //      https://authenticationbycall.com/docs
-//      ver. 24102017
+//      ver. 05112017
 
 class abc
 {
